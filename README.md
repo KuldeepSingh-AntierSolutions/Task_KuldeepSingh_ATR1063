@@ -98,14 +98,18 @@ mvn test -DsuiteXmlFile=testng.xml
 
 Below is the list of identified bugs and their test coverage status:
 
-| Bug ID | Title | Module | Severity | Priority | Status |
-|--------|-------|--------|----------|----------|--------|
-| BUG-01 | Chatbot Terms and Condition verification | Chatbot | Critical | P0 | Open |
-| BUG-02 | My Health Bio and My Health History is displayed | My Health Information | Critical | P0 | Open |
-| BUG-03 | Importance notice appears during PHI upload | My Health Information >> PHI Upload | High | P1 | Open |
-| BUG-04 | User redirects to the Navigation Page | Welcome Hailey | Critical | P0 | Open |
-| BUG-05 | Verify plan creation | My Planner | Critical | P1 | Open |
-| BUG-06 | Verify task creation | My Planner | Critical | P2 | Open |
+| Bug ID | Title | Module | Severity | Priority | Status | Test Coverage |
+|--------|-------|--------|----------|----------|--------|---------------|
+| BUG-01 | Chatbot Terms and Condition verification | Chatbot | Critical | P0 | Open | `LoginAndTermsVerificationTest` |
+| BUG-02 | My Health Bio and My Health History is displayed | My Health Information | Critical | P0 | Open | `MyHealthInformationFlowTest` |
+| BUG-03 | Importance notice appears during PHI upload | My Health Information >> PHI Upload | High | P1 | Open | `DocumentUploadFlowTest` |
+| BUG-04 | User redirects to the Navigation Page | Welcome Hailey | Critical | P0 | Open | `ExploringSoloFlowTest` |
+| BUG-05 | Verify plan creation | My Planner | Critical | P1 | Open | `AddPlanFlowTest` |
+| BUG-06 | Verify task creation | My Planner | Critical | P2 | Open | `AddSubtaskFlowTest` |
+| BUG-07 | Verify blog viewing | Health Menu >> Blogs | Medium | P2 | Open | `ViewBlogFlowTest` |
+| BUG-08 | Verify article creation | My Library | High | P1 | Open | `CreateArticleFlowTest` |
+| BUG-09 | Verify task creation from list | My Planner >> Plans List | High | P2 | Open | `AddTaskToPlanFlowTest` |
+| BUG-10 | Verify logout functionality | Health Menu | Critical | P1 | Open | `LogoutFlowTest` |
 
 ### Detailed Bug Information
 
@@ -197,6 +201,67 @@ Below is the list of identified bugs and their test coverage status:
 - **Expected Result**: Task should be added successfully to the plan
 - **Actual Result**: _[To be updated]_
 - **Test Coverage**: ✅ Automated in `AddSubtaskFlowTest`
+
+---
+
+#### BUG-07: Verify blog viewing
+- **Module**: Health Menu >> Blogs
+- **Severity**: Medium
+- **Priority**: P2
+- **Environment**: QA
+- **Preconditions**: User is logged in
+- **Steps to Reproduce**:
+  1. Health Menu → Blogs and Articles
+  2. Select a blog
+- **Expected Result**: Blog details page should display correctly
+- **Actual Result**: _[To be updated]_
+- **Test Coverage**: ✅ Automated in `ViewBlogFlowTest`
+
+---
+
+#### BUG-08: Verify article creation
+- **Module**: My Library
+- **Severity**: High
+- **Priority**: P1
+- **Environment**: QA
+- **Preconditions**: User is logged in
+- **Steps to Reproduce**:
+  1. Blogs and Articles → My Library tab
+  2. Create Folder → Open Folder
+  3. Create Manual Article
+- **Expected Result**: Article should be created and visible in the folder
+- **Actual Result**: _[To be updated]_
+- **Test Coverage**: ✅ Automated in `CreateArticleFlowTest`
+
+---
+
+#### BUG-09: Verify task creation from list
+- **Module**: My Planner >> Plans List
+- **Severity**: High
+- **Priority**: P2
+- **Environment**: QA
+- **Preconditions**: User is logged in and on Plans Listing
+- **Steps to Reproduce**:
+  1. Click (+) icon on Plans Listing
+  2. Fill task details → Save
+- **Expected Result**: Task should be added successfully
+- **Actual Result**: _[To be updated]_
+- **Test Coverage**: ✅ Automated in `AddTaskToPlanFlowTest`
+
+---
+
+#### BUG-10: Verify logout functionality
+- **Module**: Health Menu
+- **Severity**: Critical
+- **Priority**: P1
+- **Environment**: QA
+- **Preconditions**: User is logged in
+- **Steps to Reproduce**:
+  1. Health Menu → Hamburger Menu
+  2. Logout → Confirm
+- **Expected Result**: User should be redirected to Sign In page
+- **Actual Result**: _[To be updated]_
+- **Test Coverage**: ✅ Automated in `LogoutFlowTest`
 
 ---
 
