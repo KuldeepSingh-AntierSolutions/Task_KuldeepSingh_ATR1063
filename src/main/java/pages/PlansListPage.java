@@ -88,7 +88,7 @@ public class PlansListPage {
         try {
             Thread.sleep(2000);
             WebElement planElement = wait.until(ExpectedConditions.presenceOfElementLocated(
-                By.xpath("//*[contains(text(), '" + planName + "')]")));
+                    By.xpath("//*[contains(text(), '" + planName + "')]")));
             boolean isDisplayed = planElement.isDisplayed();
             System.out.println("✓ Plan '" + planName + "' found in list: " + isDisplayed);
             return isDisplayed;
@@ -102,8 +102,10 @@ public class PlansListPage {
         try {
             Thread.sleep(2000);
             WebElement planElement = driver.findElement(
-                By.xpath("//*[contains(text(), '" + planName + "')]/following-sibling::*[contains(text(), '" + priority + "')] | " +
-                         "//*[contains(text(), '" + planName + "')]/parent::*//*[contains(text(), '" + priority + "')]"));
+                    By.xpath("//*[contains(text(), '" + planName + "')]/following-sibling::*[contains(text(), '"
+                            + priority + "')] | " +
+                            "//*[contains(text(), '" + planName + "')]/parent::*//*[contains(text(), '" + priority
+                            + "')]"));
             boolean isDisplayed = planElement.isDisplayed();
             System.out.println("✓ Plan '" + planName + "' with priority '" + priority + "' displayed: " + isDisplayed);
             return isDisplayed;
@@ -132,6 +134,33 @@ public class PlansListPage {
             System.out.println("✓ Searched for plan: " + planName);
         } catch (Exception e) {
             System.err.println("Failed to search plan: " + e.getMessage());
+        }
+    }
+
+    public void clickPlanCard(String planName) {
+        try {
+            Thread.sleep(2000);
+            WebElement planCard = wait.until(ExpectedConditions.elementToBeClickable(
+                    By.xpath("//*[contains(text(), '" + planName
+                            + "')]/ancestor::div[contains(@class, 'plan') or contains(@class, 'card')]")));
+            planCard.click();
+            System.out.println("✓ Clicked on plan card: " + planName);
+        } catch (Exception e) {
+            System.err.println("Failed to click on plan card: " + e.getMessage());
+            throw new RuntimeException("Failed to click on plan card", e);
+        }
+    }
+
+    public void clickFirstPlanCard() {
+        try {
+            Thread.sleep(2000);
+            WebElement firstPlanCard = wait.until(ExpectedConditions.elementToBeClickable(
+                    By.xpath("(//div[contains(@class, 'plan-card')] | //div[contains(@class, 'plan-item')])[1]")));
+            firstPlanCard.click();
+            System.out.println("✓ Clicked on first plan card");
+        } catch (Exception e) {
+            System.err.println("Failed to click on first plan card: " + e.getMessage());
+            throw new RuntimeException("Failed to click on first plan card", e);
         }
     }
 
