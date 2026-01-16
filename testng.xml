@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="HealthAera Automation Test Suite" parallel="false" verbose="1">
+    
+    <test name="Login and Terms Verification Tests">
+        <classes>
+            <class name="tests.LoginAndTermsVerificationTest"/>
+        </classes>
+    </test>
+    
+    <test name="Exploring Solo Flow Tests">
+        <classes>
+            <class name="tests.ExploringSoloFlowTest"/>
+        </classes>
+    </test>
+    
+    <test name="My Health Information Flow Tests">
+        <classes>
+            <class name="tests.MyHealthInformationFlowTest"/>
+        </classes>
+    </test>
+    
+    <test name="Add Plan Flow Tests">
+        <classes>
+            <class name="tests.AddPlanFlowTest"/>
+        </classes>
+    </test>
+    
+</suite>
