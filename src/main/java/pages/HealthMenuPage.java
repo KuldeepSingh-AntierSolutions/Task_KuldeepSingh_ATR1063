@@ -268,7 +268,108 @@ public class HealthMenuPage {
         return logoDisplayed && dashboardDisplayed && notificationsDisplayed && hamburgerDisplayed;
     }
 
+    public void clickBlogsAndArticles() {
+        try {
+            // Wait for page to be ready
+            Thread.sleep(2000);
+
+            // Try multiple strategies to find and click Blogs and Articles
+            org.openqa.selenium.WebElement blogsButton = null;
+
+            try {
+                // Strategy 1: Find by text "Blogs" or "Articles"
+                blogsButton = wait.until(ExpectedConditions.elementToBeClickable(
+                        org.openqa.selenium.By
+                                .xpath("//*[contains(text(), 'Blogs') or contains(text(), 'Articles')]")));
+            } catch (Exception e1) {
+                try {
+                    // Strategy 2: Find by aria-label or title
+                    blogsButton = wait.until(ExpectedConditions.elementToBeClickable(
+                            org.openqa.selenium.By
+                                    .xpath("//button[contains(@aria-label, 'Blogs') or contains(@title, 'Blogs')]")));
+                } catch (Exception e2) {
+                    try {
+                        // Strategy 3: Find by icon or image alt text
+                        blogsButton = wait.until(ExpectedConditions.elementToBeClickable(
+                                org.openqa.selenium.By.xpath(
+                                        "//button[.//img[contains(@alt, 'Blog')] or .//img[contains(@alt, 'Article')]]")));
+                    } catch (Exception e3) {
+                        // Strategy 4: Find in circular menu items
+                        blogsButton = wait.until(ExpectedConditions.elementToBeClickable(
+                                org.openqa.selenium.By.xpath(
+                                        "//div[contains(@class, 'menu') or contains(@class, 'circular')]//*[contains(text(), 'Blogs')]")));
+                    }
+                }
+            }
+
+            if (blogsButton != null) {
+                Thread.sleep(500);
+                blogsButton.click();
+                System.out.println("✓ Blogs and Articles clicked");
+            }
+        } catch (Exception e) {
+            System.err.println("Failed to click Blogs and Articles: " + e.getMessage());
+            throw new RuntimeException("Failed to click Blogs and Articles", e);
+        }
+    }
+
     public String getCurrentURL() {
         return driver.getCurrentUrl();
+    }
+
+    public void clickLogout() {
+        try {
+            // Need to ensure hamburger menu is clicked first, but assuming flow handles it
+            // or we add a check if logout button is visible directly.
+            // Usually Logout is inside the hamburger menu.
+
+            Thread.sleep(1000);
+            WebElement logoutButton = wait.until(ExpectedConditions.elementToBeClickable(
+                    org.openqa.selenium.By.xpath(
+                            "//button[contains(text(), 'Logout') or contains(@aria-label, 'Logout')] | //*[contains(text(), 'Log Out')]")));
+
+            logoutButton.click();
+            System.out.println("✓ Logout button clicked");
+        } catch (Exception e) {
+            System.err.println("Failed to click logout button: " + e.getMessage());
+            throw new RuntimeException("Failed to click logout button", e);
+        }
+    }
+
+    public void clickConfirmLogout() {
+        try {
+            Thread.sleep(1000);
+            // Wait for confirmation modal/dialog
+            WebElement confirmButton = wait.until(ExpectedConditions.elementToBeClickable(
+                    org.openqa.selenium.By.xpath(
+                            "//button[contains(text(), 'Yes') or contains(text(), 'Confirm') or contains(text(), 'Logout')]")));
+
+            // Sometimes the confirm button text might be "Logout" again in the modal
+            // We need to be careful not to re-click the menu item if the modal is not yet
+            // checking.
+            // But usually modal has higher z-index or distinct structure.
+
+            confirmButton.click();
+            System.out.println("✓ Confirm logout clicked");
+        } catch (Exception e) {
+            System.err.println("Failed to click confirm logout: " + e.getMessage());
+            // It might be possible there is no confirmation, so we can log but maybe not
+            // throw if we verify logout later.
+            // But user requirement says "confirm logout", so we expect it.
+            throw new RuntimeException("Failed to click confirm logout", e);
+        }
+    }
+
+    public boolean verifyLogoutSuccess() {
+        try {
+            wait.until(ExpectedConditions.or(
+                    ExpectedConditions.urlContains("signin"),
+                    ExpectedConditions.urlContains("login")));
+            System.out.println("✓ Redirected to login page");
+            return true;
+        } catch (Exception e) {
+            System.err.println("Logout verification failed: " + e.getMessage());
+            return false;
+        }
     }
 }

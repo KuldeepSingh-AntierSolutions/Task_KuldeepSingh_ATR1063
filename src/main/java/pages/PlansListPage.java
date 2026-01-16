@@ -164,6 +164,17 @@ public class PlansListPage {
         }
     }
 
+    public void clickAddButton() {
+        try {
+            wait.until(ExpectedConditions.elementToBeClickable(addPlanButton));
+            addPlanButton.click();
+            System.out.println("✓ Clicked on Add (+) button");
+        } catch (Exception e) {
+            System.err.println("Failed to click Add button: " + e.getMessage());
+            throw new RuntimeException("Failed to click Add button", e);
+        }
+    }
+
     public String getCurrentURL() {
         return driver.getCurrentUrl();
     }

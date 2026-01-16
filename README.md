@@ -67,6 +67,10 @@ mvn test -DsuiteXmlFile=testng.xml
 | `DocumentUploadFlowTest` | Tests PHI document upload process |
 | `MyHealthInformationFlowTest` | Tests My Health Bio and History features |
 | `ExploringSoloFlowTest` | Tests exploring solo navigation flow |
+| `ViewBlogFlowTest` | Tests viewing blogs from Health Menu |
+| `CreateArticleFlowTest` | Tests creating folders and articles in My Library |
+| `AddTaskToPlanFlowTest` | Tests adding tasks directly from Plans Listing |
+| `LogoutFlowTest` | Tests logout functionality |
 
 ## Page Objects
 
@@ -81,6 +85,11 @@ mvn test -DsuiteXmlFile=testng.xml
 - `AddTaskPage` - Task creation form
 - `MyHealthInformationPage` - Health information management
 - `DocumentProcessingModal` - Document upload modal
+- `BlogsPage` - Blogs listing interactions
+- `BlogDetailPage` - Individual blog view interactions
+- `MyLibraryPage` - My Library folder management
+- `AddFolderModal` - Folder creation modal
+- `AddArticlePage` - Article creation form
 - And more...
 
 ---
